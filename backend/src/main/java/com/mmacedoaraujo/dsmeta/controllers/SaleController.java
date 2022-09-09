@@ -2,7 +2,7 @@ package com.mmacedoaraujo.dsmeta.controllers;
 
 import com.mmacedoaraujo.dsmeta.entities.Sale;
 import com.mmacedoaraujo.dsmeta.repositories.SaleRepository;
-import net.bytebuddy.asm.Advice;
+import com.mmacedoaraujo.dsmeta.services.SmsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -20,6 +19,9 @@ import java.util.Optional;
 public class SaleController {
     @Autowired
     private SaleRepository saleRepo;
+
+    @Autowired
+    private SmsService smsService;
 
     @GetMapping
     public Page<Sale> findAll(@RequestParam(value="minDate", defaultValue = "") String minDate, @RequestParam(value = "maxDate", defaultValue = "") String maxDate, Pageable pageable) {
@@ -37,5 +39,10 @@ public class SaleController {
         Optional<Sale> obj = saleRepo.findById(id);
 
         return ResponseEntity.ok().body(obj.get());
+    }
+
+    @GetMapping("/{id}/notification")
+    public void notifySms(@PathVariable Long id) {
+        smsService.sendSms(id);
     }
 }
