@@ -20,7 +20,8 @@ header {
 }
 
 .dsmeta-logo-container h1 {
-    font-size: 24px;
+    color: #c0d2eb;
+    font-size: 40px;
     margin-top: 15px;
 }
 
@@ -28,6 +29,7 @@ header {
     font-size: 14px;
     font-weight: 300;
     margin-bottom: 15px;
+    color: #a5b7d1;
 }
 
 .dsmeta-container {
