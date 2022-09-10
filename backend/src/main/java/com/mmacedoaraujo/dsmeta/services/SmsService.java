@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import java.util.Locale;
+
 @Service
 public class SmsService {
 
@@ -26,6 +28,7 @@ public class SmsService {
     @Autowired
     private SaleRepository saleRepo;
     public void sendSms(Long saleId) {
+        Locale.setDefault(new Locale("pt", "BR"));
         Sale sale = saleRepo.findById(saleId).get();
         String date = sale.getDate().getMonthValue() + "/" + sale.getDate().getYear();
         String msg = "Vendedor " + sale.getSellerName() + " foi destaque em " + date + " com um total de R$ " + String.format("%.2f", sale.getAmount());
