@@ -69,7 +69,7 @@ function SalesCard() {
                                 return (
                                     <tr key={sale.id}>
                                         <td className="show992">{sale.id}</td>
-                                        <td className="show576">{Moment(sale.date).format('DD-MM-YYYY')}</td>
+                                        <td className="show576">{Moment(sale.date).format('DD/MM/YYYY')}</td>
                                         <td>{sale.sellerName}</td>
                                         <td className="show992">{sale.visited}</td>
                                         <td className="show992">{sale.deals}</td>
