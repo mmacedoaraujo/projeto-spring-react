@@ -1,13 +1,17 @@
+import Moment from 'moment';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../../utils/request";
-import DatePicker from "react-datepicker";
+import DatePicker, { setDefaultLocale } from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import NotificationButton from '../NotificationButton';
 import './styles.css';
 import { Sale } from "../../models/sale";
 
 function SalesCard() {
+    
+    const formatDate = Moment().format('DD-MM-YYYY');
+
     const min = new Date(new Date().setDate(new Date().getDate() - 365));
     const max = new Date();
 
@@ -65,7 +69,7 @@ function SalesCard() {
                                 return (
                                     <tr key={sale.id}>
                                         <td className="show992">{sale.id}</td>
-                                        <td className="show576">{new Date(sale.date).toLocaleDateString('br-BR')}</td>
+                                        <td className="show576">{Moment(sale.date).format('DD-MM-YYYY')}</td>
                                         <td>{sale.sellerName}</td>
                                         <td className="show992">{sale.visited}</td>
                                         <td className="show992">{sale.deals}</td>
